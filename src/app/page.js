@@ -1,8 +1,14 @@
-export default function Home() {
+export default function RootLayout({ children }) {
   return (
-    <div style={{ padding: '40px', fontFamily: 'sans-serif' }}>
-      <h1>🚗 SuperApp Cars - Online</h1>
-      <p>O sistema foi conectado ao banco de dados com sucesso.</p>
-    </div>
-  );
+    <html lang="pt-br">
+      <body>
+        <nav style={{ padding: '20px', background: '#f4f4f4', marginBottom: '20px', display: 'flex', gap: '15px' }}>
+          <a href="/">Início</a>
+          <a href="/cadastro">Cadastrar Carro</a>
+          <a href="/lista">Ver Estoque</a>
+        </nav>
+        {children}
+      </body>
+    </html>
+  )
 }
