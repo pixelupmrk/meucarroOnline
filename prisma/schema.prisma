@@ -12,6 +12,5 @@ model Carro {
   id     String @id @default(uuid())
   marca  String
   modelo String
-  ano    Int
-  preco  Float
+  preco  String
 }
