@@ -1,45 +1,40 @@
+'use client'
 import React from 'react';
-import { Car, Shield Check, Users, ArrowRight } from 'lucide-react';
+import { Car, ShieldCheck, Users, ArrowRight } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#000428] text-white font-sans">
-      {/* Visual Neon de Fundo */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/20 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full"></div>
-      </div>
+    <div className="min-h-screen bg-[#000428] text-white flex flex-col items-center justify-center p-6">
+      <div className="max-w-4xl w-full text-center space-y-12">
+        <header className="space-y-4">
+          <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter uppercase neon-text">
+            Meu Carro <span className="text-cyan-400">Online</span>
+          </h1>
+          <p className="text-blue-200/60 text-lg">Ecossistema de Gestão de Estoque e Tráfego Pago</p>
+        </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-20 text-center">
-        <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase mb-6 neon-text">
-          Meu Carro <span className="text-cyan-400">Online</span>
-        </h1>
-        <p className="text-xl text-blue-100/60 max-w-2xl mx-auto mb-12">
-          A plataforma definitiva de agregação de estoque e gestão de tráfego pago para lojistas automotivos.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* Card Master (Você) */}
-          <a href="/dashboard" className="glass-card p-10 border border-cyan-500/40 hover:scale-105 transition-all group">
-            <ShieldCheck size={48} className="text-cyan-400 mb-6 mx-auto" />
-            <h2 className="text-2xl font-bold mb-2">Painel Master Admin</h2>
-            <p className="text-sm text-white/40 mb-6">Gerencie lojistas, analise ROI de tráfego e controle o Chatbot.</p>
-            <div className="flex items-center justify-center gap-2 text-cyan-400 font-bold group-hover:gap-4 transition-all">
-              ACESSAR CENTRAL <ArrowRight size={20} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Card Master Admin */}
+          <div className="glass-card p-10 border border-cyan-500/30 hover:border-cyan-400 transition-all group cursor-pointer" onClick={() => window.location.href='/dashboard'}>
+            <ShieldCheck size={48} className="mx-auto mb-4 text-cyan-400" />
+            <h2 className="text-2xl font-bold">Painel Master</h2>
+            <p className="text-white/40 text-sm mt-2 mb-6">Gerencie lojistas e métricas de anúncios.</p>
+            <div className="flex items-center justify-center gap-2 text-cyan-400 font-bold">
+              ENTRAR <ArrowRight size={20} />
             </div>
-          </a>
+          </div>
 
           {/* Card Lojista */}
-          <a href="/login" className="glass-card p-10 border border-purple-500/40 hover:scale-105 transition-all group">
-            <Users size={48} className="text-purple-400 mb-6 mx-auto" />
-            <h2 className="text-2xl font-bold mb-2">Portal do Lojista</h2>
-            <p className="text-sm text-white/40 mb-6">Área para parceiros realizarem o upload de estoque e fotos HD.</p>
-            <div className="flex items-center justify-center gap-2 text-purple-400 font-bold group-hover:gap-4 transition-all">
-              ENTRAR COMO LOJA <ArrowRight size={20} />
+          <div className="glass-card p-10 border border-purple-500/30 hover:border-purple-400 transition-all group cursor-pointer" onClick={() => window.location.href='/login'}>
+            <Users size={48} className="mx-auto mb-4 text-purple-400" />
+            <h2 className="text-2xl font-bold">Portal Lojista</h2>
+            <p className="text-white/40 text-sm mt-2 mb-6">Área para upload de fotos e veículos.</p>
+            <div className="flex items-center justify-center gap-2 text-purple-400 font-bold">
+              ACESSAR <ArrowRight size={20} />
             </div>
-          </a>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
