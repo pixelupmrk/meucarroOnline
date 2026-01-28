@@ -1,49 +1,55 @@
 'use client'
-import React from 'react';
-import { ArrowLeft, Save, Car, Camera } from 'lucide-react';
+import React, { useState } from 'react';
+import { Camera, Car, DollarSign, Calendar, Gauge, Lock, CheckCircle2, ArrowLeft } from 'lucide-react';
 
-export default function CadastrarCarro() {
+export default function CadastroLojista() {
+  const [quota] = useState(5); // Limite que você define no Master
+  const [usados] = useState(3); // Quantos ele já postou
+  const limiteAtingido = usados >= quota;
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center p-6">
-      <div className="w-full max-w-2xl">
-        <button onClick={() => window.location.href='/lojista/painel'} className="mb-8 flex items-center gap-2 text-white/40 hover:text-purple-400 font-bold uppercase text-[10px] tracking-widest transition-all">
-          <ArrowLeft size={16} /> Voltar ao Painel
-        </button>
+    <div className="min-h-screen w-full bg-[#020617] text-white p-4 md:p-10 font-sans">
+      <div className="max-w-2xl mx-auto">
+        <header className="flex justify-between items-center mb-10">
+          <h1 className="text-2xl font-black uppercase italic tracking-tighter text-cyan-400">Portal do Lojista</h1>
+          <div className="text-right">
+            <p className="text-[10px] font-black uppercase text-white/30 tracking-widest">Seu Estoque</p>
+            <p className="text-sm font-black">{usados} / {quota} Carros</p>
+          </div>
+        </header>
 
-        <h2 className="text-3xl font-black italic uppercase mb-10">Cadastrar <span className="text-purple-500">Veículo</span></h2>
-
-        <div className="space-y-6 bg-zinc-900/50 p-8 rounded-[2.5rem] border border-white/5 shadow-2xl">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black uppercase text-white/40 ml-2">Marca</label>
-              <input type="text" placeholder="Ex: Toyota" className="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-purple-500 transition-all text-sm uppercase font-bold" />
+        {limiteAtingido ? (
+          <div className="bg-white/[0.02] border border-red-500/20 p-12 rounded-[2.5rem] text-center backdrop-blur-xl">
+            <div className="w-20 h-20 bg-red-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6 text-red-500">
+              <Lock size={40} />
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black uppercase text-white/40 ml-2">Modelo</label>
-              <input type="text" placeholder="Ex: Corolla" className="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-purple-500 transition-all text-sm uppercase font-bold" />
+            <h2 className="text-xl font-black uppercase mb-4 text-red-500">Limite de Quota Atingido</h2>
+            <p className="text-sm text-white/40 mb-8 italic">"Você já usou seus {quota} espaços. Entre em contato com o Admin para aumentar seu plano."</p>
+            <button className="w-full py-4 bg-white text-black font-black uppercase italic rounded-xl">Solicitar Upgrade</button>
+          </div>
+        ) : (
+          <div className="bg-white/[0.02] border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
+            <div className="space-y-8">
+              {/* CAMPO FOTOS */}
+              <div className="aspect-video border-2 border-dashed border-white/10 rounded-3xl flex flex-col items-center justify-center gap-2 hover:border-cyan-500/50 transition-all cursor-pointer">
+                <Camera size={32} className="text-cyan-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest">Subir Fotos do Veículo</span>
+              </div>
+
+              {/* DADOS */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input placeholder="MARCA E MODELO" className="bg-white/5 border border-white/10 p-4 rounded-xl text-xs font-bold focus:border-cyan-500/50 outline-none" />
+                <input placeholder="PREÇO (R$)" className="bg-white/5 border border-white/10 p-4 rounded-xl text-xs font-bold focus:border-cyan-500/50 outline-none text-cyan-400" />
+                <input placeholder="ANO" className="bg-white/5 border border-white/10 p-4 rounded-xl text-xs font-bold focus:border-cyan-500/50 outline-none" />
+                <input placeholder="KM" className="bg-white/5 border border-white/10 p-4 rounded-xl text-xs font-bold focus:border-cyan-500/50 outline-none" />
+              </div>
+
+              <button className="w-full bg-cyan-500 text-black font-black uppercase italic py-5 rounded-2xl shadow-lg shadow-cyan-500/20 hover:-translate-y-1 transition-all">
+                Publicar no Sistema
+              </button>
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black uppercase text-white/40 ml-2">Ano</label>
-              <input type="number" placeholder="2024" className="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-purple-500 transition-all text-sm font-bold" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] font-black uppercase text-white/40 ml-2">Preço (R$)</label>
-              <input type="text" placeholder="150.000" className="bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-purple-500 transition-all text-sm font-bold" />
-            </div>
-          </div>
-
-          <div className="border-2 border-dashed border-white/10 rounded-3xl p-10 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-all cursor-pointer">
-            <Camera className="text-white/20" size={40} />
-            <p className="text-[10px] font-black uppercase text-white/40 tracking-widest">Clique para subir fotos do veículo</p>
-          </div>
-
-          <button className="w-full py-5 bg-purple-600 hover:bg-purple-500 rounded-2xl font-black italic uppercase tracking-[0.2em] shadow-lg shadow-purple-600/20 transition-all active:scale-95 flex items-center justify-center gap-3">
-            <Save size={20} /> Publicar Anúncio
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
