@@ -3,76 +3,63 @@
 @tailwind utilities;
 
 :root {
-  --neon-blue: #00f2ff;
-  --neon-purple: #bc13fe;
-  --dark-bg: #020617;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 10, 10, 20;
 }
 
+/* Força o site a ficar centralizado e com fundo preto de luxo */
 body {
-  color: white;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
   min-height: 100vh;
-  /* Fundo com imagem de carro futurista e overlay escuro para leitura */
-  background: 
-    linear-gradient(135deg, rgba(2, 6, 23, 0.92), rgba(0, 30, 60, 0.85)),
-    url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2070&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  overflow-x: hidden;
 }
 
-/* Efeito de Vidro (Glassmorphism) - MELHORADO */
-.glass-card {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(0, 242, 255, 0.2);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-  transition: all 0.3s ease;
+@layer components {
+  /* Efeito de Vidro Espelhado (Glassmorphism) */
+  .glass-card {
+    @apply bg-white/[0.03] border border-white/10 backdrop-blur-xl 
+           shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500;
+  }
+
+  /* Efeito Neon 3D para botões Master (Ciano) */
+  .btn-master {
+    @apply glass-card hover:border-cyan-500/50 hover:shadow-cyan-500/10 
+           hover:-translate-y-2 active:scale-95;
+  }
+
+  /* Efeito Neon 3D para botões Lojista (Roxo) */
+  .btn-lojista {
+    @apply glass-card hover:border-purple-500/50 hover:shadow-purple-500/10 
+           hover:-translate-y-2 active:scale-95;
+  }
+
+  /* Texto com brilho neon */
+  .neon-text-cyan {
+    @apply drop-shadow-[0_0_10px_rgba(34,211,238,0.5)];
+  }
+
+  .neon-text-purple {
+    @apply drop-shadow-[0_0_10px_rgba(168,85,247,0.5)];
+  }
 }
 
-.glass-card:hover {
-  border: 1px solid rgba(0, 242, 255, 0.5);
-  box-shadow: 0 8px 40px 0 rgba(0, 242, 255, 0.15);
-  transform: translateY(-5px);
-}
-
-/* Texto Neon */
-.neon-text {
-  color: var(--neon-blue);
-  text-shadow: 
-    0 0 7px rgba(0, 242, 255, 0.3),
-    0 0 10px rgba(0, 242, 255, 0.2);
-  letter-spacing: -0.05em;
-}
-
-/* Botões Estilizados */
-.btn-neon-blue {
-  background: rgba(0, 242, 255, 0.1);
-  border: 1px solid var(--neon-blue);
-  color: var(--neon-blue);
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.btn-neon-blue:hover {
-  background: var(--neon-blue);
-  color: black;
-  box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
-}
-
-/* Ajuste para inputs (formulários) */
-input {
-  background: rgba(0, 0, 0, 0.3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: white !important;
-  backdrop-filter: blur(5px);
-}
-
-input:focus {
-  border-color: var(--neon-blue) !important;
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+/* Ajuste para o Next.js ocupar a tela toda */
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
