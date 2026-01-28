@@ -2,62 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 10, 10, 20;
+/* Configuração de Reset e Centralização Total */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Força o site a ficar centralizado e com fundo preto de luxo */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #020617; /* Fundo Deep Black */
+  color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 0;
+  justify-content: center; /* Força o conteúdo para o centro da tela */
+  font-family: sans-serif;
   overflow-x: hidden;
 }
 
+/* Camada de Gradiente de Fundo (Efeito Luxo) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(30, 58, 138, 0.15) 0%, transparent 70%);
+  z-index: -1;
+}
+
 @layer components {
-  /* Efeito de Vidro Espelhado (Glassmorphism) */
-  .glass-card {
-    @apply bg-white/[0.03] border border-white/10 backdrop-blur-xl 
-           shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500;
+  /* Efeito Vidro Espelhado (Glassmorphism) */
+  .glass-effect {
+    @apply bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-2xl;
   }
 
-  /* Efeito Neon 3D para botões Master (Ciano) */
-  .btn-master {
-    @apply glass-card hover:border-cyan-500/50 hover:shadow-cyan-500/10 
+  /* Botão 3D Master (Ciano Neon) */
+  .btn-3d-cyan {
+    @apply glass-effect relative transition-all duration-500 cursor-pointer
+           hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.2)]
            hover:-translate-y-2 active:scale-95;
   }
 
-  /* Efeito Neon 3D para botões Lojista (Roxo) */
-  .btn-lojista {
-    @apply glass-card hover:border-purple-500/50 hover:shadow-purple-500/10 
+  /* Botão 3D Lojista (Roxo Neon) */
+  .btn-3d-purple {
+    @apply glass-effect relative transition-all duration-500 cursor-pointer
+           hover:border-purple-500/50 hover:shadow-[0_0_30_rgba(168,85,247,0.2)]
            hover:-translate-y-2 active:scale-95;
   }
 
-  /* Texto com brilho neon */
-  .neon-text-cyan {
-    @apply drop-shadow-[0_0_10px_rgba(34,211,238,0.5)];
-  }
-
-  .neon-text-purple {
-    @apply drop-shadow-[0_0_10px_rgba(168,85,247,0.5)];
+  /* Título com Brilho Neon */
+  .neon-title {
+    @apply font-black italic uppercase tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.3)];
   }
 }
 
-/* Ajuste para o Next.js ocupar a tela toda */
+/* Ajuste para Containers do Next.js */
 main {
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
